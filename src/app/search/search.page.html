@@ -1,0 +1,43 @@
+<ion-header translucent>
+  <ion-toolbar no-padding color='primary'>
+    <div class="toolbar-content">
+      <ion-row>
+        <ion-col>
+    <ion-title>Actors</ion-title>
+  </ion-col>
+      </ion-row>
+    </div>
+  </ion-toolbar>
+
+    <ion-toolbar no-border-top>
+          <div search-bar-bcg>
+            <ion-row>
+              <ion-col>
+              <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="onEvent($event)"></ion-searchbar>
+              </ion-col>
+            </ion-row>
+          </div>
+</ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6" *ngFor='let person of actor' (click)="onPersonDetail(person.id)">
+          <img *ngIf="person.profile_path" class="poster" [src]="'https://image.tmdb.org/t/p/w185' + person.profile_path">
+          <div class="card-subtitle">
+            <ion-row>
+              <ion-col>
+                  <div>{{ person.name }}</div>
+              </ion-col>
+              <ion-col>
+                  <div>{{ person.title }}</div>
+              </ion-col>
+            </ion-row>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+</ion-card>
+</ion-content>

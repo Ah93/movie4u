@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ person?.name }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-grid *ngIf="person">
+    <ion-row>
+      <ion-col col-6>
+        <img *ngIf="person.profile_path" class="profile-photo" [src]="'https://image.tmdb.org/t/p/w500' + person.profile_path">
+      </ion-col>
+
+      <ion-col col-6>
+        <h4>name: </h4><p>{{ person?.name }}</p>
+        <h4>Date of Birth: </h4><p>{{ person?.birthday | date:'dd/MM/yyyy' }}</p>
+        <h4>Place of Birth: </h4><p>{{ person?.place_of_birth }}</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12>
+        <h4>Biography</h4>
+        <p>{{ person?.biography }}</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+</ion-content>

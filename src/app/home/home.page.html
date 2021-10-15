@@ -1,20 +1,131 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+  <ion-header translucent>
+    <ion-toolbar no-padding color='primary'>
+      <div class="toolbar-content">
+        <ion-row>
+          <ion-col>
+      <ion-title>Movies</ion-title>
+    </ion-col>
+        </ion-row>
+      </div>
     </ion-toolbar>
+
+  <ion-toolbar no-border-top>
+      <div background-size container-hearder-image [ngStyle]="{'background-image': 'url(assets/images/background/2.jpg)'}">
+           <div search-bar-bcg>
+            <ion-row>
+              <ion-col>
+              <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="onEvent($event)"></ion-searchbar>
+              </ion-col>
+            </ion-row>
+          </div>
+       </div>
+  </ion-toolbar>
   </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
-</ion-content>
+  <ion-toolbar no-border-top >
+    <ion-segment [(ngModel)]="segmentModel">
+      <ion-segment-button value="now_playing" class='options_button'>
+        In Theater
+      </ion-segment-button>
+      <ion-segment-button value="popular" class='options_button'>
+        Popular
+      </ion-segment-button>
+      <ion-segment-button value="top_rated" class='options_button'>
+        Top Rated
+      </ion-segment-button>
+      <ion-segment-button value="upcoming" class='options_button'>
+        Upcoming
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+
+  <ion-content padding>
+    <ion-card *ngIf="segmentModel === 'now_playing'">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="6" *ngFor='let movie of moviesInTheaters' (click)="getDetails(movie.id)">
+              <div><img  src="{{'https://image.tmdb.org/t/p/w500'+movie.poster_path}}"/></div>
+              <div class="card-subtitle">
+                <ion-row>
+                  <ion-col>
+                      <ion-icon name="star"></ion-icon>
+                      <div>{{movie.vote_average}}</div>
+                  </ion-col>
+                  <ion-col>
+                      <ion-icon name="calendar"></ion-icon>
+                      <div>{{movie.release_date | date: 'yyyy'}}</div>
+                  </ion-col>
+                </ion-row>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+    </ion-card>
+
+    <ion-card *ngIf="segmentModel === 'popular'">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="6" *ngFor='let movie of moviesPopular' (click)="getDetails(movie.id)">
+            <div><img  src="{{'https://image.tmdb.org/t/p/w500'+movie.poster_path}}"/></div>
+            <div class="card-subtitle">
+              <ion-row>
+                <ion-col>
+                    <ion-icon name="star"></ion-icon>
+                    <div>{{movie.vote_average}}</div>
+                </ion-col>
+                <ion-col>
+                    <ion-icon name="calendar"></ion-icon>
+                    <div>{{movie.release_date | date: 'yyyy'}}</div>
+                </ion-col>
+              </ion-row>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  </ion-card>
+
+  <ion-card *ngIf="segmentModel === 'upcoming'">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6" *ngFor='let movie of moviesTopRated' (click)="getDetails(movie.id)">
+          <div><img  src="{{'https://image.tmdb.org/t/p/w500'+movie.poster_path}}"/></div>
+          <div class="card-subtitle">
+            <ion-row>
+              <ion-col>
+                  <ion-icon name="star"></ion-icon>
+                  <div>{{movie.vote_average}}</div>
+              </ion-col>
+              <ion-col>
+                  <ion-icon name="calendar"></ion-icon>
+                  <div>{{movie.release_date | date: 'yyyy'}}</div>
+              </ion-col>
+            </ion-row>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+</ion-card>
+
+<ion-card *ngIf="segmentModel === 'top_rated'">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" *ngFor='let movie of moviesUpcoming' (click)="getDetails(movie.id)">
+        <div><img  src="{{'https://image.tmdb.org/t/p/w500'+movie.poster_path}}"/></div>
+        <div class="card-subtitle">
+          <ion-row>
+            <ion-col>
+                <ion-icon name="star"></ion-icon>
+                <div>{{movie.vote_average}}</div>
+            </ion-col>
+            <ion-col>
+                <ion-icon name="calendar"></ion-icon>
+                <div>{{movie.release_date | date: 'yyyy'}}</div>
+            </ion-col>
+          </ion-row>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-card>
+
+  </ion-content>

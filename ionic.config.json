@@ -1,5 +1,7 @@
 {
   "name": "movie4u",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
