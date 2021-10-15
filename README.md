@@ -8,7 +8,7 @@ If you would like to download the code and try it for yourself:
 
 Clone the repo: https://github.com/Ah93/movie4u.git
 
-cd shop4u
+cd movie4u
 
 Install packages: npm install
 
